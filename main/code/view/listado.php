@@ -28,16 +28,16 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
             <?php else: ?>
                 <?php foreach ($mascotas as $m): ?>
                     <tr class="container justify-content-center">
-                        <th scope="row"><?= htmlspecialchars($m['id'] ?? '') ?></th>
-                        <td><?= htmlspecialchars($m['nombre'] ?? '') ?></td>
-                        <td><?= htmlspecialchars($m['especie'] ?? '') ?></td>
-                        <td><?= htmlspecialchars($m['edad'] ?? '') ?></td>
-                        <td>
+                        <th class="align-middle text-center" scope="row"><?= htmlspecialchars($m['id'] ?? '') ?></th>
+                        <td class="align-middle text-center"><?= htmlspecialchars($m['nombre'] ?? '') ?></td>
+                        <td class="align-middle text-center"><?= htmlspecialchars($m['especie'] ?? '') ?></td>
+                        <td class="align-middle text-center"><?= htmlspecialchars($m['edad'] ?? '') ?></td>
+                        <td class="align-middle text-center">
                             <?php if (!empty($m['foto'])): ?>
                                 <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" width="80" alt="Foto de mascota">
                             <?php endif; ?>
                         </td>
-                        <td>
+                        <td class="align-middle text-center">
                             <a href="?accion=editar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-primary">Editar</a>
                             <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-danger" onclick="return confirm('¿Seguro que quieres eliminar esta mascota?');">Eliminar</a>
                             <a onclick="descargarFila(<?= $m['id'] ?>)" class="btn btn-sm me-2 btn-warning">Descargar JSON</a>
