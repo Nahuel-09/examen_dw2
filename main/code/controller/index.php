@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "../model/lib/config.php";
 require_once "../model/lib/ConnDB.php";
 require_once "../model/lib/ImgHandler.php";
@@ -30,7 +31,10 @@ switch ($accion) {
                 try {
                     $foto = ImgHandler::guardar($_FILES['foto']);
                 } catch (Exception $e) {
-                    die("Hubo un error al subir la imagen: ". $e->getMessage());
+                    $_SESSION['alerta'] = [
+                        'tipo' => "danger",
+                        'mensaje' => "Hubo un error al subir la imagen " . $e->getMessage()
+                    ];
                 }
             }
 
@@ -46,7 +50,13 @@ switch ($accion) {
         cargarVistas();
         break;
     case 'editar':
-        if (!$id) die("ID no especificada para editar.");
+        if (!$id) {
+            $_SESSION['alerta'] = [
+                'tipo' => "danger",
+                'mensaje' => "No se encontro la ID"
+            ];
+            header('Location: index.php');
+        }
 
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $foto = '';
@@ -54,7 +64,10 @@ switch ($accion) {
                 try {
                     $foto = ImgHandler::guardar($_FILES['foto']);
                 } catch (Exception $e) {
-                    die("Hubo un error al subir la imagen: ". $e->getMessage());
+                    $_SESSION['alerta'] = [
+                        'tipo' => "danger",
+                        'mensaje' => "Hubo un error al subir la imagen " . $e->getMessage()
+                    ];
                 }
             } else {
                 $mascotaActual = $conn->conseguir($id);
@@ -75,7 +88,14 @@ switch ($accion) {
         }
         break;
     case 'eliminar':
-        if (!$id) die("ID no especificada para editar.");
+        if (!$id) { 
+            $_SESSION['alerta'] = [
+                'tipo' => "danger",
+                'mensaje' => "No se encontro la ID"
+            ];
+            header('Location: index.php');
+        }
+
         $conn->eliminar($id);
         header('Location: index.php');
         exit;
@@ -87,9 +107,9 @@ switch ($accion) {
         break;
     case 'conseguir':
         if (!$id) {
-            mandarJSON([
-                'data' => 'ID no proporcionada',
-                'msg' => 'error'
+            mandarJSON($_SESSION['alerta'] = [
+                'tipo' => "danger",
+                'mensaje' => "No se encontro la ID"
             ]);
         }
         $registro = $conn->conseguir($id);

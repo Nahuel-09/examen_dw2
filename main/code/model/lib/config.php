@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 if (!defined('NAME_TABLE')) define("NAME_TABLE","mascotas");
 if (!defined('SAVE_IMG')) define("SAVE_IMG", __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR);
 if (!defined('DB_HOST')) define("DB_HOST", "localhost");
