@@ -6,15 +6,20 @@ class ImgHandler {
         if (!isset($archivo) || $archivo['error'] !== UPLOAD_ERR_OK) {
             throw new Exception("Error al subir la imagen.");
         }
-        
+
+        $maxTamano = 2 * 1024 * 1024; 
+        if ($archivo['size'] > $maxTamano) {
+            throw new Exception("La imagen es demasiado grande. Máximo permitido: 2MB.");
+        }
+
         $tipoImagen = exif_imagetype($archivo['tmp_name']);
         $extensionesPermitidas = [
             IMAGETYPE_JPEG => ['ext' => '.jpg', 'create' => 'imagecreatefromjpeg', 'save' => 'imagejpeg'],
             IMAGETYPE_PNG  => ['ext' => '.png', 'create' => 'imagecreatefrompng',  'save' => 'imagepng'],
             IMAGETYPE_WEBP => ['ext' => '.webp','create' => 'imagecreatefromwebp', 'save' => 'imagewebp'],
-            IMAGETYPE_GIF => ['ext' => '.gif', 'create' => 'imagecreatefromgif', 'save' => 'imagegif'],
+            IMAGETYPE_GIF  => ['ext' => '.gif', 'create' => 'imagecreatefromgif',  'save' => 'imagegif'],
         ];
-        
+
         if (!isset($extensionesPermitidas[$tipoImagen])) {
             throw new Exception("Tipo de imagen no soportado. Solo se permiten JPG, PNG, WEBP y GIF.");
         }

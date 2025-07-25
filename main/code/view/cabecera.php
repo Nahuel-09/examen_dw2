@@ -19,13 +19,17 @@
         <a class="nav-link text-warning" onclick="descargarTodo()">Descargar Todos Los Datos a JSON</a>
       </li>
     </ul>
+    <br>
     <?php if (isset($_SESSION['alerta'])): ?>
-        <div class="alert alert-<?=$_SESSION['alerta']['tipo']?> alert-dismissible fade show m-3" role="alert">
-        <?php if ($_SESSION['alerta']['tipo'] === 'danger' || $_SESSION['alerta']['tipo'] === 'warning'): ?>
-          <h3><strong class="text-<?=$_SESSION['alerta']['tipo']?>"> <?=$_SESSION['alerta']['mensaje']?></strong></h3>
+        <div class="alert alert-<?=$_SESSION['alerta']['status']?> alert-dismissible fade show m-3" role="alert">
+        <?php if ($_SESSION['alerta']['status'] === 'danger' || $_SESSION['alerta']['status'] === 'warning'): ?>
+          <h4><strong class="text-<?=$_SESSION['alerta']['status']?>"> <?=$_SESSION['alerta']['msg']?></strong></h4>
         <?php else:?>
-          <h2><strong class="text-<?=$_SESSION['alerta']['tipo']?>"> <?=$_SESSION['alerta']['mensaje']?></strong></h2>
+          <h2><strong class="text-<?=$_SESSION['alerta']['status']?>"> <?=$_SESSION['alerta']['msg']?></strong></h2>
         <?php endif;?>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
         </div>
         <?php unset($_SESSION['alerta']);?>
     <?php endif;?>
+    <br>

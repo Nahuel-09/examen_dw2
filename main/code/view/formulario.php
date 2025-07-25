@@ -9,7 +9,7 @@ $mascota = $mascota ?? [
 ];
 ?>
 
-<div class="d-flex justify-content-center align-items-center mb-5 mt-5">
+<div class="d-flex justify-content-center align-items-center">
 <form action="?accion=<?= $accion ?><?= ($accion === 'editar' && !empty($mascota['id'])) ? '&id=' . htmlspecialchars($mascota['id']) : '' ?>" enctype="multipart/form-data" method="post" class="p-4 border rounded" style="max-width: 800px; width: 100%;">
     <h2 class="text-center mb-4"> <?= $accion === 'editar' ? 'Editar Mascota' : 'Agregar Mascota' ?></h2>
     <input type="hidden" class="form-control" name="id" value="<?= htmlspecialchars($mascota['id'] ?? '', ENT_QUOTES) ?>">
