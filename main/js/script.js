@@ -30,6 +30,7 @@ const descargarTodo = () => {
     fetch(`index.php?accion=conseguirTodo`)
     .then(async rs => {
         const text = await rs.text();
+        // console.log("Contenido crudo de la respuesta:", text); debug
         
         try {
             const data = JSON.parse(text);
