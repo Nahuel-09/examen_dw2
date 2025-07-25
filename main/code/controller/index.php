@@ -114,7 +114,7 @@ switch ($accion) {
             ];
     
             // Redirige a index para evitar resubmisión de formulario
-            header('Location: index.php');
+            header('Location: index.php?accion=listar');
             exit;
         }
         renderizarHtml(); // Si no es POST, muestra formulario vacío
@@ -127,7 +127,7 @@ switch ($accion) {
                 'status' => "danger",
                 'msg' => "ID inválida"
             ];
-            header('Location: index.php');
+            header('Location: index.php?accion=listar');
             exit;
         }
         
@@ -192,7 +192,7 @@ switch ($accion) {
             ];
     
             // Redirige a index para evitar resubmisión
-            header('Location: index.php');
+            header('Location: index.php?accion=listar');
             exit;
         } else {
             // Si no es POST, obtiene los datos actuales para mostrar en formulario
@@ -203,43 +203,60 @@ switch ($accion) {
 
     case 'eliminar':
         // Verifica que exista un id válido
-        if (!$id) { 
+        if ($id) {
+            // Borrar la imagen antes de eliminar el registro
+            $mascota = $conn->conseguir($id);
+            if ($mascota && !empty($mascota['foto'])) {
+                $rutaImagen = SAVE_IMG . '/' . $mascota['foto'];
+                if (file_exists($rutaImagen)) {
+                    unlink($rutaImagen); // Elimina la imagen del disco
+                }
+            }
+            // Elimina el registro con el id especificado
+            $conn->eliminar($id);
+
+            // Establece alerta de advertencia confirmando eliminación
+            $_SESSION['alert'] = ['status' => 'warning', 'msg' => 'Mascota eliminada correctamente.'];
+        } else { // en caso de no existir sucede esto
             $_SESSION['alerta'] = [
                 'status' => "danger",
                 'msg' => "No se encontro la ID"
             ];
-            header('Location: index.php');
+            header('Location: index.php?accion=listar');
         }
-
-        // Elimina el registro con el id especificado
-        $conn->eliminar($id);
-
-        // Establece alerta de advertencia confirmando eliminación
-        $_SESSION['alert'] = [
-            'status' => 'warning',
-            'msg' => 'Mascota eliminada correctamente.'
-        ];
-
         // Redirige a index
-        header('Location: index.php');
+        header('Location: index.php?accion=listar');
         exit;
         break;
 
     case 'eliminarTodo':
-        // Elimina todos los registros de la tabla
-        $conn->eliminarTodo();
-
-        // Establece alerta de advertencia confirmando eliminación masiva
-        $_SESSION['alert'] = [
-            'status' => 'warning',
-            'msg' => 'Se elimino todo correctamente.'
-        ];
+        case 'eliminarTodo':
+            // Obtener todos los registros antes de eliminarlos
+            $mascotas = $conn->conseguirTodos();
+        
+            // Eliminar las imágenes asociadas a cada mascota
+            foreach ($mascotas as $mascota) {
+                if (!empty($mascota['foto'])) {
+                    $rutaImagen = SAVE_IMG . '/' . $mascota['foto'];
+                    if (file_exists($rutaImagen)) {
+                        unlink($rutaImagen);
+                    }
+                }
+            }
+        
+            // Elimina todos los registros de la tabla
+            $conn->eliminarTodo();
+        
+            // Establece alerta de advertencia confirmando eliminación masiva
+            $_SESSION['alert'] = [
+                'status' => 'warning',
+                'msg' => 'Se eliminó todo correctamente.'
+            ];
 
         // Redirige a index
-        header('Location: index.php');
+        header('Location: index.php?accion=listar');
         exit;
         break;
-
     case 'conseguir':
         // Valida que se haya proporcionado un id
         if (!$id) {
