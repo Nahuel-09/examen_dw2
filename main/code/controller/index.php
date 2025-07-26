@@ -1,4 +1,5 @@
-<!-- 
+<?php 
+/*
 En este punto, se desarrollo un controlador que maneja por medio de acciones GET, todos los registros y descargas API, se cita las acciones que se hacen.. 
 Agrega un nuevo registro
 Edita un registro por medio de la ID
@@ -6,7 +7,8 @@ Elimina un registro por medio de la ID
 Consigue una fila con los datos de la base de datos para transformarlo en un json API
 Consigue todos los datos de la base de datos para transformarlo en un json API
 Elimina todos los datos de la base de datos 
--->
+*/
+?>
 
 <?php 
 // Inicia el buffer de salida para evitar problemas con headers
