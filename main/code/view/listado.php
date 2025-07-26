@@ -27,7 +27,7 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
 <br>
 
 <!-- Contenedor principal -->
-<div class="container">
+<section class="container">
     <!-- Tabla Bootstrap con estilos para mostrar mascotas -->
     <table class="table table-info table-striped-columns text-center justify-content-center align-items-center">
         <thead>
@@ -73,38 +73,38 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
             <?php endif; ?>
         </tbody>
     </table>
-</div>
+</section>
 
 <br>
 <br>
 
 <!-- Verifica si hay más de una página para mostrar la paginación -->
-<?php if ($paginacion->totalPaginas() > 0): ?>
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        <!-- Botón para página anterior, deshabilitado si estamos en la primera página -->
-        <li class="page-item <?= ($paginaActual <= 1) ? 'disabled' : '' ?>">
-            <a class="page-link" href="?accion=listar&pagina=<?= ($paginaActual - 1) ?>">&larr;</a>
-        </li>
-        
-        <!-- Genera enlaces para cada página -->
-        <?php for ($i = 1; $i <= $paginacion->totalPaginas(); $i++): ?>
-            <li class="page-item <?= ($i == $paginaActual) ? 'active' : '' ?>">
-                <a class="page-link" href="?accion=listar&pagina=<?= $i ?>"><?= $i ?></a>
+<section class="d-flex justify-content-center">
+    <?php if ($paginacion->totalPaginas() > 0): ?>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- Botón para página anterior, deshabilitado si estamos en la primera página -->
+            <li class="page-item <?= ($paginaActual <= 1) ? 'disabled' : '' ?>">
+                <a class="page-link" href="?accion=listar&pagina=<?= ($paginaActual - 1) ?>">&larr;</a>
             </li>
-        <?php endfor; ?>
-        
-        <!-- Botón para página siguiente, deshabilitado si estamos en la última página -->
-        <li class="page-item <?= ($paginaActual >= $paginacion->totalPaginas()) ? 'disabled' : '' ?>">
-            <a class="page-link" href="?accion=listar&pagina=<?= ($paginaActual + 1) ?>">&rarr;</a>
-        </li>
-    </ul>
-</nav>
-<?php endif; ?>
+            
+            <!-- Genera enlaces para cada página -->
+            <?php for ($i = 1; $i <= $paginacion->totalPaginas(); $i++): ?>
+                <li class="page-item <?= ($i == $paginaActual) ? 'active' : '' ?>">
+                    <a class="page-link" href="?accion=listar&pagina=<?= $i ?>"><?= $i ?></a>
+                </li>
+            <?php endfor; ?>
+            
+            <!-- Botón para página siguiente, deshabilitado si estamos en la última página -->
+            <li class="page-item <?= ($paginaActual >= $paginacion->totalPaginas()) ? 'disabled' : '' ?>">
+                <a class="page-link" href="?accion=listar&pagina=<?= ($paginaActual + 1) ?>">&rarr;</a>
+            </li>
+        </ul>
+    </nav>
+    <?php endif; ?>
+</section>
 
 <!-- Muestra información sobre los registros mostrados y total -->
 <p class="text-center mt-3">
     Mostrando <?= ($paginacion->inicio() + 1) ?> a <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?> de <?= $totalRegistros ?> registros
 </p>
-
-<br>

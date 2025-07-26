@@ -14,7 +14,7 @@ $mascota = $mascota ?? [
 ?>
 
 <!-- Contenedor centrado usando flexbox de Bootstrap -->
-<div class="d-flex justify-content-center align-items-center">
+<main class="d-flex justify-content-center align-items-center">
 
 <!-- Formulario para agregar o editar mascota -->
 <!--
@@ -78,4 +78,4 @@ $mascota = $mascota ?? [
       <a href="../controller/index.php" class="btn btn-secondary">Cancelar</a>
     </div>
 </form>
-</div>
+</main>

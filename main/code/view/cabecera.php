@@ -27,7 +27,6 @@
     <?php if (isset($_SESSION['alerta'])): ?> <!-- Verifica si existe un mensaje de alerta en la sesión -->
         <section class="alert alert-<?=$_SESSION['alerta']['status']?> alert-dismissible fade show m-3" role="alert">
         <!-- Contenedor para la alerta con clases dinámicas según el tipo de alerta (success, danger, warning, etc.) -->
-        
         <?php if ($_SESSION['alerta']['status'] === 'danger' || $_SESSION['alerta']['status'] === 'warning'): ?>
           <p><strong class="text-<?=$_SESSION['alerta']['status']?>"> <?=$_SESSION['alerta']['msg']?></strong></p> 
           <!-- Si la alerta es de tipo peligro o advertencia, muestra el mensaje dentro de un párrafo con texto en color correspondiente -->
@@ -35,7 +34,6 @@
           <h2><strong class="text-<?=$_SESSION['alerta']['status']?>"> <?=$_SESSION['alerta']['msg']?></strong></h2> 
           <!-- Para otro tipo de alertas, muestra el mensaje con un título h2 con texto en color correspondiente -->
         <?php endif;?>
-        
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button> 
           <!-- Botón para cerrar la alerta, con atributos para accesibilidad y funcionalidad Bootstrap -->
         </section>

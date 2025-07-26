@@ -110,7 +110,7 @@ switch ($accion) {
             ]);
             
             // Establece alerta positiva para notificar éxito
-            $_SESSION['alert'] = [
+            $_SESSION['alerta'] = [
                 'status' => 'success',
                 'msg' => 'Mascota agregada correctamente.'
             ];
@@ -188,7 +188,7 @@ switch ($accion) {
             ], $id);
     
             // Establece alerta de éxito
-            $_SESSION['alert'] = [
+            $_SESSION['alerta'] = [
                 'type' => 'success',
                 'message' => 'Mascota actualizada correctamente.'
             ];
@@ -218,7 +218,7 @@ switch ($accion) {
             $conn->eliminar($id);
 
             // Establece alerta de advertencia confirmando eliminación
-            $_SESSION['alert'] = ['status' => 'warning', 'msg' => 'Mascota eliminada correctamente.'];
+            $_SESSION['alerta'] = ['status' => 'warning', 'msg' => 'Mascota eliminada correctamente.'];
         } else { // en caso de no existir sucede esto
             $_SESSION['alerta'] = [
                 'status' => "danger",
@@ -232,28 +232,27 @@ switch ($accion) {
         break;
 
     case 'eliminarTodo':
-        case 'eliminarTodo':
-            // Obtener todos los registros antes de eliminarlos
-            $mascotas = $conn->conseguirTodos();
-        
-            // Eliminar las imágenes asociadas a cada mascota
-            foreach ($mascotas as $mascota) {
-                if (!empty($mascota['foto'])) {
-                    $rutaImagen = SAVE_IMG . '/' . $mascota['foto'];
-                    if (file_exists($rutaImagen)) {
-                        unlink($rutaImagen);
-                    }
+        // Obtener todos los registros antes de eliminarlos
+        $mascotas = $conn->conseguirTodos();
+    
+        // Eliminar las imágenes asociadas a cada mascota
+        foreach ($mascotas as $mascota) {
+            if (!empty($mascota['foto'])) {
+                $rutaImagen = SAVE_IMG . '/' . $mascota['foto'];
+                if (file_exists($rutaImagen)) {
+                    unlink($rutaImagen);
                 }
             }
-        
-            // Elimina todos los registros de la tabla
-            $conn->eliminarTodo();
-        
-            // Establece alerta de advertencia confirmando eliminación masiva
-            $_SESSION['alert'] = [
-                'status' => 'warning',
-                'msg' => 'Se eliminó todo correctamente.'
-            ];
+        }
+    
+        // Elimina todos los registros de la tabla
+        $conn->eliminarTodo();
+    
+        // Establece alerta de advertencia confirmando eliminación masiva
+        $_SESSION['alerta'] = [
+            'status' => 'warning',
+            'msg' => 'Se eliminó todo correctamente.'
+        ];
 
         // Redirige a index
         header('Location: index.php?accion=listar');
