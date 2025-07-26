@@ -262,8 +262,8 @@ switch ($accion) {
         // Valida que se haya proporcionado un id
         if (!$id) {
             mandarJSON([
-                'data' => 'ID no proporcionada',
-                'msg' => 'error'
+                'msg' => 'ID no proporcionada',
+                'status' => 'error'
             ]);
         }
         // Obtiene el registro solicitado
