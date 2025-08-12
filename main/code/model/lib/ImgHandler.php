@@ -43,7 +43,7 @@ class ImgHandler {
         }
 
         // Genera un nombre único para la imagen con la extensión adecuada
-        $nombreFinal = uniqid('img_', true) . $extension;
+        $nombreFinal = "Img_created_in--" . date('H_i_s--d_m_Y') . $extension;
         // Construye la ruta final donde se guardará la imagen
         $rutaFinal = rtrim($destinoDir, '/') . '/' . $nombreFinal;
 
