@@ -4,7 +4,7 @@
   <meta charset="UTF-8"> <!-- Define la codificación de caracteres del documento como UTF-8 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que la página sea responsiva para dispositivos móviles -->
   <title>Examen Final DW2</title> <!-- Título que aparece en la pestaña del navegador -->
-  <link rel="stylesheet" href="../model/src/bootstrap/dist/css/bootstrap.min.css"> <!-- Incluye los estilos CSS de Bootstrap para el diseño -->
+  <link rel="stylesheet" href="../model/src/bootstrap-5.3.7-dist/css/bootstrap.min.css"> <!-- Incluye los estilos CSS de Bootstrap para el diseño -->
 </head>
 <body>
   <section class="card text-center"> <!-- Sección que actúa como una tarjeta con contenido centrado -->

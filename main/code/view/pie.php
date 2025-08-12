@@ -18,7 +18,7 @@
     </div>
 </footer>
 <!-- Inclusión de scripts necesarios para funcionalidades de Bootstrap -->
-<script src="../model/src/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../model/src/bootstrap-5.3.7-dist/js/bootstrap.min.js"></script>
 
 <!-- Inclusión de archivo JavaScript personalizado para el sitio -->
 <script src="../../js/script.js"></script>
