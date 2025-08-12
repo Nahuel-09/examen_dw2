@@ -33,11 +33,24 @@ $pagina = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 
 // Función para enviar datos como JSON y terminar el script
 function mandarJSON($data) {
-    ob_end_clean(); // Limpia buffer de salida (más agresivo que ob_clean)
-    header("Content-Type: application/json; charset=utf-8"); // Indica que la respuesta será JSON UTF-8
-    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); // Codifica datos con formato legible y sin escapar unicode
-    exit; // Finaliza ejecución del script
+    ob_end_clean(); // Limpia buffer de salida
+    header("Content-Type: application/json; charset=utf-8");
+    // Convertir a JSON
+    $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    // Carpeta donde guardar
+    $carpeta = __DIR__ . '/../model/API/';
+    if (!is_dir($carpeta)) { mkdir($carpeta, 0777, true); }
+    // Nombre del archivo
+    $nombreArchivo = 'json_created_in--' . date('H_i_s--d_m_Y') . '.json';
+    // Guardar el archivo y comprobar si fue exitoso
+    if (file_put_contents($carpeta . $nombreArchivo, $json) === false) {
+        error_log("No se pudo guardar el archivo JSON en $carpeta");
+    }
+    // Enviar respuesta al cliente
+    echo $json;
+    exit;
 }
+
 
 // Función auxiliar para renderizar las vistas HTML
 function renderizarHtml($mascota = []) {
@@ -264,7 +277,7 @@ switch ($accion) {
             mandarJSON([
                 'msg' => 'ID no proporcionada',
                 'status' => 'error'
-            ]);
+            ]); // no guarda archivo porque es error
         }
         // Obtiene el registro solicitado
         $registro = $conn->conseguir($id);
@@ -276,13 +289,13 @@ switch ($accion) {
                 'data' => $registro,
                 'msg' => 'Datos Obtenidos Correctamente',
                 'status' => 'success',
-            ]);
+            ]); // guarda archivo
         } else { // Si no se encuentra, envía mensaje de error
             mandarJSON([
                 'rows' => 0,
                 'msg' => 'Registro no encontrado',
                 'status' => 'error',
-            ]);
+            ]); // no guarda archivo
         }
         break;
 
@@ -297,13 +310,13 @@ switch ($accion) {
                 'data' => $data,
                 'msg' => 'Registro encontrado',
                 'status' => 'success',
-            ]);
+            ]); // guarda archivo
         } else { // Si no hay datos, envía mensaje de error
             mandarJSON([
                 'rows' => 0,
                 'msg' => 'Registro no encontrado',
                 'status' => 'error',
-            ]);
+            ]); // no guarda archivo
         }
         break;
 
