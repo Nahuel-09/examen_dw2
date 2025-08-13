@@ -59,7 +59,7 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
                         <td class="align-middle text-center">
                             <!-- Mostrar imagen miniatura si existe -->
                             <?php if (!empty($m['foto'])): ?>
-                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" width="80" height="80" alt="Foto de mascota">
+                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="height: 80px;" alt="Foto de mascota">
                             <?php endif; ?>
                         </td>
                         <td class="align-middle text-center">
