@@ -63,11 +63,19 @@ $Mascota = $Mascota ?? [
       <!-- Input tipo file para subir imagen -->
       <input type="file" class="form-control" name="foto">
       <p class="form-text text-muted">Formatos aceptados: JPG, PNG, GIF, WEBP.</p>
-
       <!-- Si existe una foto previa, la muestra con estilo miniatura -->
       <?php if (!empty($Mascota['foto'])): ?>
-        <img src="../model/images/<?= $Mascota['foto'] ?>" width="350" alt="Foto actual" class="img-thumbnail rounded">
-      <?php endif;?>
+        <div class="mt-2">
+            <img src="../model/images/<?= $Mascota['foto'] ?>" width="350" alt="Foto actual" class="img-thumbnail rounded">
+            <br>
+            <!-- Campo para cambiar el nombre de la imagen -->
+            <label for="nombre_foto" class="form-label mt-2">Cambiar nombre de la imagen:</label>
+            <input type="text" class="form-control" name="nombre_foto" value="<?= pathinfo($Mascota['foto'], PATHINFO_FILENAME) ?>">
+            <small class="form-text text-muted">
+                El nombre actual es: <strong><?= htmlspecialchars($Mascota['foto']) ?></strong>
+            </small>
+        </div>
+      <?php endif; ?>
     </div>
 
     <!-- Botones para enviar o cancelar -->

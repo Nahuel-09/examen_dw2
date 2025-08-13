@@ -178,8 +178,23 @@ switch ($accion) {
                 // Si no se sube imagen nueva, conserva la anterior
                 $MascotaActual = $conn->conseguir($id);
                 $foto = $MascotaActual['foto'] ?? '';
+
+                // Verifica si el usuario quiere cambiarle el nombre
+                if (!empty($_POST['nombre_foto']) && $foto) {
+                    $nuevoNombre = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $_POST['nombre_foto']); // Sanitiza
+                    $extension = pathinfo($foto, PATHINFO_EXTENSION);
+                    $rutaActual = SAVE_IMG . $foto;
+                    $nuevaRuta = SAVE_IMG . $nuevoNombre . "." . $extension;
+
+                    if (file_exists($rutaActual)) {
+                        if (rename($rutaActual, $nuevaRuta)) {
+                            $foto = $nuevoNombre . "." . $extension; // Actualiza nombre en BD
+                        } else {
+                            $errores[] = "No se pudo renombrar la imagen.";
+                        }
+                    }
+                }
             }
-    
             // Si hay errores, muestra alerta y recarga formulario con datos existentes
             if (count($errores) > 0) {
                 $_SESSION['alerta'] = [
