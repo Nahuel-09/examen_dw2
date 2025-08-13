@@ -21,7 +21,7 @@
     <br> <!-- Salto de línea para separación -->
 
     <!-- Se implementó sección de alerta para mostrar mensajes al usuario -->
-    <?php if (isset($_SESSION['alerta'])): ?> <!-- Verifica si existe un mensaje de alerta en la sesión -->
+    <?php if (isset($_SESSION['alerta'])&& isset($_SESSION['alerta']['status']) && isset($_SESSION['alerta']['msg'])): ?> <!-- Verifica si existe un mensaje de alerta en la sesión -->
         <section class="alert alert-<?=$_SESSION['alerta']['status']?> alert-dismissible fade show m-3" role="alert">
         <!-- Contenedor para la alerta con clases dinámicas según el tipo de alerta (success, danger, warning, etc.) -->
         <?php if ($_SESSION['alerta']['status'] === 'danger' || $_SESSION['alerta']['status'] === 'warning'): ?>

@@ -198,7 +198,7 @@ switch ($accion) {
             // Si hay errores, muestra alerta y recarga formulario con datos existentes
             if (count($errores) > 0) {
                 $_SESSION['alerta'] = [
-                    'status' => 'danger',
+                    'status' => 'success',
                     'msg' => implode('<br>', $errores)
                 ];
                 $Mascota = $conn->conseguir($id);
@@ -216,8 +216,8 @@ switch ($accion) {
     
             // Establece alerta de éxito
             $_SESSION['alerta'] = [
-                'type' => 'success',
-                'message' => 'Mascota actualizada correctamente.'
+                'status' => 'success',
+                'msg' => 'Mascota actualizada correctamente.'
             ];
     
             // Redirige a index para evitar resubmisión
