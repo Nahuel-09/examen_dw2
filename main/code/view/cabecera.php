@@ -9,9 +9,6 @@
 <body>
   <section class="card text-center"> <!-- Sección que actúa como una tarjeta con contenido centrado -->
     <ul class="nav nav-tabs nav-underline row justify-content-center align-items"> <!-- Lista de navegación con pestañas y diseño responsivo con Bootstrap -->
-      <li class="col nav-item"> <!-- Elemento de la lista que ocupa una columna -->
-        <a class="nav-link text-success" href="?accion=agregar">Agregar datos</a> <!-- Enlace para agregar datos con estilo de texto verde -->
-      </li>
       <li class="col nav-item"> <!-- Otro elemento de la lista -->
         <a class="nav-link text-danger" href="?accion=eliminarTodo" onclick="return confirm('¿Estás seguro de que quieres eliminar TODOS los registros? Esta acción no se puede deshacer.');">Eliminar Todo</a> 
         <!-- Enlace para eliminar todos los registros con texto en rojo y una confirmación antes de ejecutar la acción -->

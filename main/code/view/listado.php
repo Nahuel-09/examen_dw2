@@ -15,8 +15,10 @@ $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
 // Obtener la página actual desde GET, asegurando que sea al menos 1
 $paginaActual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 
+$paginaTope = 4;
+
 // Crear objeto de paginación con total registros, página actual y límite de registros por página (5)
-$paginacion = new Pagination($totalRegistros, $paginaActual, 5);
+$paginacion = new Pagination($totalRegistros, $paginaActual, $paginaTope);
 
 // Obtener los registros de Mascotas correspondientes a la página actual, usando los métodos de paginación
 $Mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite());
@@ -107,6 +109,6 @@ $Mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
 <!-- Muestra información sobre los registros mostrados y total -->
 <?php if ($totalRegistros > 0): ?>
     <p class="text-center mt-3">
-        Mostrando <?= ($paginacion->inicio() + 1) ?> a <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?> de <?= $totalRegistros ?> registros
+        Pagina: <?= $paginaActual ?>,   Filas tope: <?= $paginaTope ?>,   Registros totales: <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?>.
     </p>
 <?php endif; ?>
