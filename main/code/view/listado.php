@@ -59,7 +59,7 @@ $Mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
                         <td class="align-middle text-center">
                             <!-- Mostrar imagen miniatura si existe -->
                             <?php if (!empty($m['foto'])): ?>
-                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="min-height: 80px; min-width: 80px;" alt="Foto de Mascota">
+                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="height: 40px; width: 40px; min-height: 80px; min-width: 80px;" alt="Foto de Mascota">
                             <?php endif; ?>
                         </td>
                         <td class="align-middle text-center">
@@ -105,6 +105,8 @@ $Mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
 </section>
 
 <!-- Muestra información sobre los registros mostrados y total -->
-<p class="text-center mt-3">
-    Mostrando <?= ($paginacion->inicio() + 1) ?> a <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?> de <?= $totalRegistros ?> registros
-</p>
+<?php if ($totalRegistros > 0): ?>
+    <p class="text-center mt-3">
+        Mostrando <?= ($paginacion->inicio() + 1) ?> a <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?> de <?= $totalRegistros ?> registros
+    </p>
+<?php endif; ?>
