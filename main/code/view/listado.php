@@ -18,8 +18,8 @@ $paginaActual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 // Crear objeto de paginación con total registros, página actual y límite de registros por página (5)
 $paginacion = new Pagination($totalRegistros, $paginaActual, 5);
 
-// Obtener los registros de mascotas correspondientes a la página actual, usando los métodos de paginación
-$mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite());
+// Obtener los registros de Mascotas correspondientes a la página actual, usando los métodos de paginación
+$Mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite());
 ?>
 
 <br>
@@ -28,7 +28,7 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
 
 <!-- Contenedor principal -->
 <section class="container">
-    <!-- Tabla Bootstrap con estilos para mostrar mascotas -->
+    <!-- Tabla Bootstrap con estilos para mostrar Mascotas -->
     <table class="table table-info table-striped-columns text-center justify-content-center align-items-center">
         <thead>
             <tr>
@@ -42,14 +42,14 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
             </tr>
         </thead>
         <tbody>
-            <!-- Verifica si no hay mascotas para mostrar -->
-            <?php if (empty($mascotas)): ?>
+            <!-- Verifica si no hay Mascotas para mostrar -->
+            <?php if (empty($Mascotas)): ?>
                 <tr>
-                    <td colspan="6" class="text-center">No hay mascotas registradas</td>
+                    <td colspan="6" class="text-center">No hay Mascotas registradas</td>
                 </tr>
             <?php else: ?>
-                <!-- Recorre cada mascota para mostrar en filas -->
-                <?php foreach ($mascotas as $m): ?>
+                <!-- Recorre cada Mascota para mostrar en filas -->
+                <?php foreach ($Mascotas as $m): ?>
                     <tr class="container justify-content-center">
                         <!-- Mostrar cada campo con htmlspecialchars para evitar XSS -->
                         <th class="align-middle text-center" scope="row"><?= htmlspecialchars($m['id'] ?? '') ?></th>
@@ -59,13 +59,13 @@ $mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite
                         <td class="align-middle text-center">
                             <!-- Mostrar imagen miniatura si existe -->
                             <?php if (!empty($m['foto'])): ?>
-                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="min-height: 80px; min-width: 80px;" alt="Foto de mascota">
+                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="min-height: 80px; min-width: 80px;" alt="Foto de Mascota">
                             <?php endif; ?>
                         </td>
                         <td class="align-middle text-center">
-                            <!-- Botones para editar, eliminar y descargar JSON de la mascota -->
+                            <!-- Botones para editar, eliminar y descargar JSON de la Mascota -->
                             <a href="?accion=editar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-primary">Editar</a>
-                            <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-danger" onclick="return confirm('¿Seguro que quieres eliminar esta mascota?');">Eliminar</a>
+                            <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-danger" onclick="return confirm('¿Seguro que quieres eliminar esta Mascota?');">Eliminar</a>
                             <a onclick="descargarFila(<?= $m['id'] ?>)" class="btn btn-sm me-2 btn-warning">Descargar JSON</a>
                         </td>
                     </tr>

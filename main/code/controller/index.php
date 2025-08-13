@@ -38,13 +38,12 @@ function mandarJSON($data) {
     // Convertir a JSON
     $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     // Carpeta donde guardar
-    $carpeta = __DIR__ . '/../model/API/';
-    if (!is_dir($carpeta)) { mkdir($carpeta, 0777, true); }
+    if (!is_dir(SAVE_JSON)) { mkdir(SAVE_JSON, 0777, true); }
     // Nombre del archivo
     $nombreArchivo = 'json_created_in--' . date('H_i_s--d_m_Y') . '.json';
     // Guardar el archivo y comprobar si fue exitoso
-    if (file_put_contents($carpeta . $nombreArchivo, $json) === false) {
-        error_log("No se pudo guardar el archivo JSON en $carpeta");
+    if (file_put_contents(SAVE_JSON . $nombreArchivo, $json) === false) {
+        error_log("No se pudo guardar el archivo JSON en " . SAVE_JSON);
     }
     // Enviar respuesta al cliente
     echo $json;
@@ -53,10 +52,10 @@ function mandarJSON($data) {
 
 
 // Función auxiliar para renderizar las vistas HTML
-function renderizarHtml($mascota = []) {
+function renderizarHtml($Mascota = []) {
     include "../view/cabecera.php";  // Incluye cabecera HTML
-    include "../view/formulario.php"; // Incluye formulario para agregar/editar mascota
-    include "../view/listado.php";  // Incluye listado de mascotas
+    include "../view/formulario.php"; // Incluye formulario para agregar/editar Mascota
+    include "../view/listado.php";  // Incluye listado de Mascotas
     include "../view/pie.php";      // Incluye pie de página
 }
 
@@ -177,8 +176,8 @@ switch ($accion) {
                 }
             } else {
                 // Si no se sube imagen nueva, conserva la anterior
-                $mascotaActual = $conn->conseguir($id);
-                $foto = $mascotaActual['foto'] ?? '';
+                $MascotaActual = $conn->conseguir($id);
+                $foto = $MascotaActual['foto'] ?? '';
             }
     
             // Si hay errores, muestra alerta y recarga formulario con datos existentes
@@ -187,8 +186,8 @@ switch ($accion) {
                     'status' => 'danger',
                     'msg' => implode('<br>', $errores)
                 ];
-                $mascota = $conn->conseguir($id);
-                renderizarHtml($mascota);
+                $Mascota = $conn->conseguir($id);
+                renderizarHtml($Mascota);
                 break;
             }
     
@@ -211,8 +210,8 @@ switch ($accion) {
             exit;
         } else {
             // Si no es POST, obtiene los datos actuales para mostrar en formulario
-            $mascota = $conn->conseguir($id);
-            renderizarHtml($mascota);
+            $Mascota = $conn->conseguir($id);
+            renderizarHtml($Mascota);
         }
         break;    
 
@@ -220,9 +219,9 @@ switch ($accion) {
         // Verifica que exista un id válido
         if ($id) {
             // Borrar la imagen antes de eliminar el registro
-            $mascota = $conn->conseguir($id);
-            if ($mascota && !empty($mascota['foto'])) {
-                $rutaImagen = SAVE_IMG . '/' . $mascota['foto'];
+            $Mascota = $conn->conseguir($id);
+            if ($Mascota && !empty($Mascota['foto'])) {
+                $rutaImagen = SAVE_IMG . '/' . $Mascota['foto'];
                 if (file_exists($rutaImagen)) {
                     unlink($rutaImagen); // Elimina la imagen del disco
                 }
@@ -246,12 +245,12 @@ switch ($accion) {
 
     case 'eliminarTodo':
         // Obtener todos los registros antes de eliminarlos
-        $mascotas = $conn->conseguirTodos();
+        $Mascotas = $conn->conseguirTodos();
     
-        // Eliminar las imágenes asociadas a cada mascota
-        foreach ($mascotas as $mascota) {
-            if (!empty($mascota['foto'])) {
-                $rutaImagen = SAVE_IMG . '/' . $mascota['foto'];
+        // Eliminar las imágenes asociadas a cada Mascota
+        foreach ($Mascotas as $Mascota) {
+            if (!empty($Mascota['foto'])) {
+                $rutaImagen = SAVE_IMG . '/' . $Mascota['foto'];
                 if (file_exists($rutaImagen)) {
                     unlink($rutaImagen);
                 }

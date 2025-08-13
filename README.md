@@ -1,6 +1,6 @@
 1. Gestión de Mascotas.
 
-Desarrollar una aplicación web dinámica en PHP con funcionalidades completas de CRUD para gestionar mascotas. La aplicación debe cumplir una serie de requísitos técnicos que serán verificados en clase al momento de la corrección.
+Desarrollar una aplicación web dinámica en PHP con funcionalidades completas de CRUD para gestionar Mascotas. La aplicación debe cumplir una serie de requísitos técnicos que serán verificados en clase al momento de la corrección.
 
 - Requisitos Técnicos Obligatorios:
 
@@ -32,7 +32,7 @@ La aplicación debe estar contenida en una carpeta nombrada según el siguiente 
 * Validación y sanitización obligatorias antes de guardar/modificar datos.
 
 ▪︎ Listado:
-○ Muestra imagen de cada mascota (máx. 80px alto).
+○ Muestra imagen de cada Mascota (máx. 80px alto).
 ○ Paginación de 4 registros por página (usando clase vista en clase).
 ○ Botones por registro: Editar, Borrar (con confirmación), JSON.
 ○ Botones generales: Nuevo, JSON (todos los registros).
@@ -50,7 +50,7 @@ La aplicación debe estar contenida en una carpeta nombrada según el siguiente 
 * Nombre obligatorio: dw2f1 <inicial_nombre><apellido
 * Crear la siguiente tabla:
 
-CREATE TABLE mascotas (
+CREATE TABLE Mascotas (
 id INT AUTO INCREMENT PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL,
 especie VARCHAR(100) NOT NULL,
