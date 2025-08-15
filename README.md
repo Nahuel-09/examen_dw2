@@ -1,6 +1,6 @@
-1. Gestión de Mascotas.
+1. Gestión de recintos.
 
-Desarrollar una aplicación web dinámica en PHP con funcionalidades completas de CRUD para gestionar Mascotas. La aplicación debe cumplir una serie de requísitos técnicos que serán verificados en clase al momento de la corrección.
+Desarrollar una aplicación web dinámica en PHP con funcionalidades completas de CRUD para gestionar recintos. La aplicación debe cumplir una serie de requísitos técnicos que serán verificados en clase al momento de la corrección.
 
 - Requisitos Técnicos Obligatorios:
 
@@ -24,7 +24,7 @@ La aplicación debe estar contenida en una carpeta nombrada según el siguiente 
 ▪︎ formulario.php (para alta y edición)
 ▪︎ listado.php (con paginación y acciones)
 
-▪︎ CRUD (Mascotas):
+▪︎ CRUD (recintos):
 
 * Formulario reutilizable para alta y modificación.
 * Carga de imagen JPEG redimensionada a 540px usando la clase ImgRZ.
@@ -32,7 +32,7 @@ La aplicación debe estar contenida en una carpeta nombrada según el siguiente 
 * Validación y sanitización obligatorias antes de guardar/modificar datos.
 
 ▪︎ Listado:
-○ Muestra imagen de cada Mascota (máx. 80px alto).
+○ Muestra imagen de cada recintos (máx. 80px alto).
 ○ Paginación de 4 registros por página (usando clase vista en clase).
 ○ Botones por registro: Editar, Borrar (con confirmación), JSON.
 ○ Botones generales: Nuevo, JSON (todos los registros).
@@ -50,12 +50,12 @@ La aplicación debe estar contenida en una carpeta nombrada según el siguiente 
 * Nombre obligatorio: dw2f1 <inicial_nombre><apellido
 * Crear la siguiente tabla:
 
-CREATE TABLE Mascotas (
+CREATE TABLE recintos (
 id INT AUTO INCREMENT PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL,
-especie VARCHAR(100) NOT NULL,
-edad INT NOT NULL,
-foto VARCHAR(191)
+tipo VARCHAR(100) NOT NULL,
+capacidad INT NOT NULL,
+imagen VARCHAR(191)
 );
 
 - Insertar al menos 7 registros válidos para la corrección.

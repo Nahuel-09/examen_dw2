@@ -1,6 +1,4 @@
 <?php 
-include "config.php"; // Incluye archivo de configuración con constantes como SAVE_IMG
-
 class ImgHandler {
     // Método estático para guardar y redimensionar una imagen subida
     public static function guardar($archivo, $destinoDir = SAVE_IMG, $anchoNuevo = 540, $calidad = 80) {

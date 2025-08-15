@@ -7,7 +7,7 @@ class Pagination {
     // Página actual que se está visualizando
     public $paginaActual;
 
-    // Constructor que inicializa las propiedades
+    // Constructor que inicializa las propicapacidades
     // $total: total de registros
     // $pag: página actual (por defecto 1)
     // $ult: registros por página (por defecto 10)

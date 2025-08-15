@@ -1,9 +1,9 @@
 <?php 
 /*
-En este punto, se desarrollo un controlador que maneja por medio de acciones GET, todos los registros y descargas API, se cita las acciones que se hacen.. 
-Agrega un nuevo registro
-Edita un registro por medio de la ID
-Elimina un registro por medio de la ID
+En este punto, se desarrollo un controlador que maneja por medio de acciones GET, todos los recintos y descargas API, se cita las acciones que se hacen.. 
+Agrega un nuevo recintos
+Edita un recintos por medio de la ID
+Elimina un recintos por medio de la ID
 Consigue una fila con los datos de la base de datos para transformarlo en un json API
 Consigue todos los datos de la base de datos para transformarlo en un json API
 Elimina todos los datos de la base de datos 
@@ -11,54 +11,7 @@ Elimina todos los datos de la base de datos
 ?>
 
 <?php 
-// Inicia el buffer de salida para evitar problemas con headers
-ob_start(); 
-// Inicia sesión para manejar variables $_SESSION
-session_start();
-
-// Incluye archivos necesarios con clases y configuraciones
-require_once "../model/lib/config.php";
-require_once "../model/lib/ConnDB.php";
-require_once "../model/lib/ImgHandler.php";
-require_once "../model/lib/Pagination.php";
-
-// Crea instancia de la clase para conexión y manejo de BD
-$conn = new ConnDB();
-// Obtiene la acción enviada vía GET o cadena vacía si no existe
-$accion = $_GET['accion'] ?? '';
-// Obtiene el id enviado vía GET y lo convierte a entero
-$id = intval($_GET['id'] ?? null);
-// Obtiene la página actual enviada vía GET, mínimo 1
-$pagina = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
-
-// Función para enviar datos como JSON y terminar el script
-function mandarJSON($data) {
-    ob_end_clean(); // Limpia buffer de salida
-    header("Content-Type: application/json; charset=utf-8");
-    // Convertir a JSON
-    $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    // Carpeta donde guardar
-    if (!is_dir(SAVE_JSON)) { mkdir(SAVE_JSON, 0777, true); }
-    // Nombre del archivo
-    $nombreArchivo = 'json_created_in--' . date('H_i_s--d_m_Y') . '.json';
-    // Guardar el archivo y comprobar si fue exitoso
-    if (file_put_contents(SAVE_JSON . $nombreArchivo, $json) === false) {
-        error_log("No se pudo guardar el archivo JSON en " . SAVE_JSON);
-    }
-    // Enviar respuesta al cliente
-    echo $json;
-    exit;
-}
-
-
-// Función auxiliar para renderizar las vistas HTML
-function renderizarHtml($Mascota = []) {
-    include "../view/cabecera.php";  // Incluye cabecera HTML
-    include "../view/formulario.php"; // Incluye formulario para agregar/editar Mascota
-    include "../view/listado.php";  // Incluye listado de Mascotas
-    include "../view/pie.php";      // Incluye pie de página
-}
-
+// Switch para manejar las distintas acciones enviadas por GET
 // Switch para manejar las distintas acciones enviadas por GET
 switch ($accion) {
     case 'agregar':
@@ -68,8 +21,8 @@ switch ($accion) {
     
             // Sanitiza y limpia entradas del formulario para evitar XSS
             $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ''), ENT_QUOTES, 'UTF-8');
-            $especie = htmlspecialchars(trim($_POST['especie'] ?? ''), ENT_QUOTES, 'UTF-8');
-            $edad = $_POST['edad'] ?? '';
+            $tipo = htmlspecialchars(trim($_POST['tipo'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $capacidad = $_POST['capacidad'] ?? '';
     
             // Validaciones del lado servidor
             // Verifica que nombre no esté vacío y no exceda 100 caracteres
@@ -77,26 +30,26 @@ switch ($accion) {
                 $errores[] = 'El nombre es obligatorio y debe tener menos de 100 caracteres.';
             }
             
-            // Verifica que especie no esté vacío y no exceda 100 caracteres
-            if ($especie === '' || strlen($especie) > 100) {
-                $errores[] = 'La especie es obligatoria y debe tener menos de 100 caracteres.';
+            // Verifica que tipo no esté vacío y no exceda 100 caracteres
+            if ($tipo === '' || strlen($tipo) > 100) {
+                $errores[] = 'La tipo es obligatoria y debe tener menos de 100 caracteres.';
             }
             
-            // Verifica que edad sea un entero entre 0 y 100
-            if (!ctype_digit(strval($edad)) || $edad < 0 || $edad > 100) {
-                $errores[] = 'La edad debe ser un número entero entre 0 y 100.';
+            // Verifica que capacidad sea un entero entre 0 y 100
+            if (!ctype_digit(strval($capacidad)) || $capacidad < 0 || $capacidad > 100) {
+                $errores[] = 'La capacidad debe ser un número entero entre 0 y 100.';
             }
             
             // Valida que se haya subido una imagen (es obligatoria aquí)
-            if (empty($_FILES['foto']['tmp_name'])) {
+            if (empty($_FILES['imagen']['tmp_name'])) {
                 $errores[] = "La imagen es obligatoria.";
             }
-            $foto = ''; // Inicializa variable para almacenar nombre de archivo
+            $imagen = ''; // Inicializa variable para almacenar nombre de archivo
     
             // Si se subió una imagen, intenta guardarla usando ImgHandler
-            if (!empty($_FILES['foto']['tmp_name'])) {
+            if (!empty($_FILES['imagen']['tmp_name'])) {
                 try {
-                    $foto = ImgHandler::guardar($_FILES['foto']);
+                    $imagen = ImgHandler::guardar($_FILES['imagen']);
                 } catch (Exception $e) {
                     // Captura error y agrega mensaje a errores
                     $errores[] = "Error al subir la imagen: " . $e->getMessage();
@@ -113,18 +66,18 @@ switch ($accion) {
                 break;
             }
             
-            // Agrega nuevo registro en base de datos con los datos validados
+            // Agrega nuevo recintos en base de datos con los datos validados
             $conn->agregar([
                 'nombre' => $nombre,
-                'especie' => $especie,
-                'edad' => intval($edad),
-                'foto' => $foto
+                'tipo' => $tipo,
+                'capacidad' => intval($capacidad),
+                'imagen' => $imagen
             ]);
             
             // Establece alerta positiva para notificar éxito
             $_SESSION['alerta'] = [
                 'status' => 'success',
-                'msg' => 'Mascota agregada correctamente.'
+                'msg' => 'recintos agregado correctamente.'
             ];
     
             // Redirige a index para evitar resubmisión de formulario
@@ -151,44 +104,44 @@ switch ($accion) {
             
             // Limpia y sanitiza los datos recibidos
             $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ''), ENT_QUOTES, 'UTF-8');
-            $especie = htmlspecialchars(trim($_POST['especie'] ?? ''), ENT_QUOTES, 'UTF-8');
-            $edad = $_POST['edad'] ?? '';
+            $tipo = htmlspecialchars(trim($_POST['tipo'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $capacidad = $_POST['capacidad'] ?? '';
     
             // Validaciones de campos
             if ($nombre === '' || strlen($nombre) > 100) {
                 $errores[] = 'El nombre es obligatorio y debe tener menos de 100 caracteres.';
             }
     
-            if ($especie === '' || strlen($especie) > 100) {
-                $errores[] = 'La especie es obligatoria y debe tener menos de 100 caracteres.';
+            if ($tipo === '' || strlen($tipo) > 100) {
+                $errores[] = 'La tipo es obligatoria y debe tener menos de 100 caracteres.';
             }
     
-            if (!ctype_digit(strval($edad)) || $edad < 0 || $edad > 100) {
-                $errores[] = 'La edad debe ser un número entero entre 0 y 100.';
+            if (!ctype_digit(strval($capacidad)) || $capacidad < 0 || $capacidad > 100) {
+                $errores[] = 'La capacidad debe ser un número entero entre 0 y 100.';
             }
     
             // Si se sube una nueva imagen, intenta guardarla
-            if (!empty($_FILES['foto']['tmp_name'])) {
+            if (!empty($_FILES['imagen']['tmp_name'])) {
                 try {
-                    $foto = ImgHandler::guardar($_FILES['foto']);
+                    $imagen = ImgHandler::guardar($_FILES['imagen']);
                 } catch (Exception $e) {
                     $errores[] = "Error al subir la imagen: " . $e->getMessage();
                 }
             } else {
                 // Si no se sube imagen nueva, conserva la anterior
-                $MascotaActual = $conn->conseguir($id);
-                $foto = $MascotaActual['foto'] ?? '';
+                $recintosActual = $conn->conseguir($id);
+                $imagen = $recintosActual['imagen'] ?? '';
 
                 // Verifica si el usuario quiere cambiarle el nombre
-                if (!empty($_POST['nombre_foto']) && $foto) {
-                    $nuevoNombre = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $_POST['nombre_foto']); // Sanitiza
-                    $extension = pathinfo($foto, PATHINFO_EXTENSION);
-                    $rutaActual = SAVE_IMG . $foto;
+                if (!empty($_POST['nombre_imagen']) && $imagen) {
+                    $nuevoNombre = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $_POST['nombre_imagen']); // Sanitiza
+                    $extension = pathinfo($imagen, PATHINFO_EXTENSION);
+                    $rutaActual = SAVE_IMG . $imagen;
                     $nuevaRuta = SAVE_IMG . $nuevoNombre . "." . $extension;
 
                     if (file_exists($rutaActual)) {
                         if (rename($rutaActual, $nuevaRuta)) {
-                            $foto = $nuevoNombre . "." . $extension; // Actualiza nombre en BD
+                            $imagen = $nuevoNombre . "." . $extension; // Actualiza nombre en BD
                         } else {
                             $errores[] = "No se pudo renombrar la imagen.";
                         }
@@ -201,23 +154,23 @@ switch ($accion) {
                     'status' => 'success',
                     'msg' => implode('<br>', $errores)
                 ];
-                $Mascota = $conn->conseguir($id);
-                renderizarHtml($Mascota);
+                $recintos = $conn->conseguir($id);
+                renderizarHtml($recintos);
                 break;
             }
     
-            // Actualiza el registro en la base de datos
+            // Actualiza el recintos en la base de datos
             $conn->editar([
                 'nombre' => $nombre,
-                'especie' => $especie,
-                'edad' => intval($edad),
-                'foto' => $foto
+                'tipo' => $tipo,
+                'capacidad' => intval($capacidad),
+                'imagen' => $imagen
             ], $id);
     
             // Establece alerta de éxito
             $_SESSION['alerta'] = [
                 'status' => 'success',
-                'msg' => 'Mascota actualizada correctamente.'
+                'msg' => 'recintos modificados correctamente.'
             ];
     
             // Redirige a index para evitar resubmisión
@@ -225,27 +178,27 @@ switch ($accion) {
             exit;
         } else {
             // Si no es POST, obtiene los datos actuales para mostrar en formulario
-            $Mascota = $conn->conseguir($id);
-            renderizarHtml($Mascota);
+            $recintos = $conn->conseguir($id);
+            renderizarHtml($recintos);
         }
         break;    
 
     case 'eliminar':
         // Verifica que exista un id válido
         if ($id) {
-            // Borrar la imagen antes de eliminar el registro
-            $Mascota = $conn->conseguir($id);
-            if ($Mascota && !empty($Mascota['foto'])) {
-                $rutaImagen = SAVE_IMG . '/' . $Mascota['foto'];
+            // Borrar la imagen antes de eliminar el recintos
+            $recintos = $conn->conseguir($id);
+            if ($recintos && !empty($recintos['imagen'])) {
+                $rutaImagen = SAVE_IMG . '/' . $recintos['imagen'];
                 if (file_exists($rutaImagen)) {
                     unlink($rutaImagen); // Elimina la imagen del disco
                 }
             }
-            // Elimina el registro con el id especificado
+            // Elimina el recintos con el id especificado
             $conn->eliminar($id);
 
             // Establece alerta de advertencia confirmando eliminación
-            $_SESSION['alerta'] = ['status' => 'warning', 'msg' => 'Mascota eliminada correctamente.'];
+            $_SESSION['alerta'] = ['status' => 'warning', 'msg' => 'recintos eliminado correctamente.'];
         } else { // en caso de no existir sucede esto
             $_SESSION['alerta'] = [
                 'status' => "danger",
@@ -259,20 +212,20 @@ switch ($accion) {
         break;
 
     case 'eliminarTodo':
-        // Obtener todos los registros antes de eliminarlos
-        $Mascotas = $conn->conseguirTodos();
+        // Obtener todos los recintos antes de eliminarlos
+        $recintos = $conn->conseguirTodos();
     
-        // Eliminar las imágenes asociadas a cada Mascota
-        foreach ($Mascotas as $Mascota) {
-            if (!empty($Mascota['foto'])) {
-                $rutaImagen = SAVE_IMG . '/' . $Mascota['foto'];
+        // Eliminar las imágenes asociadas a cada recintos
+        foreach ($recintos as $recintos) {
+            if (!empty($recintos['imagen'])) {
+                $rutaImagen = SAVE_IMG . '/' . $recintos['imagen'];
                 if (file_exists($rutaImagen)) {
                     unlink($rutaImagen);
                 }
             }
         }
     
-        // Elimina todos los registros de la tabla
+        // Elimina todos los recintos de la tabla
         $conn->eliminarTodo();
     
         // Establece alerta de advertencia confirmando eliminación masiva
@@ -291,30 +244,30 @@ switch ($accion) {
             mandarJSON([
                 'msg' => 'ID no proporcionada',
                 'status' => 'error'
-            ]); // no guarda archivo porque es error
+            ],'conseguir-'); // no guarda archivo porque es error
         }
-        // Obtiene el registro solicitado
-        $registro = $conn->conseguir($id);
+        // Obtiene el recintos solicitado
+        $recintos = $conn->conseguir($id);
         
         // Si se encuentra, envía los datos en JSON con status success
-        if ($registro) {
+        if ($recintos) {
             mandarJSON([
                 'rows' => 1,
-                'data' => $registro,
-                'msg' => 'Datos Obtenidos Correctamente',
+                'data' => $recintos,
+                'msg' => 'recintos encontrado correctamente',
                 'status' => 'success',
-            ]); // guarda archivo
+            ],'conseguir-', $bandera); // guarda archivo
         } else { // Si no se encuentra, envía mensaje de error
             mandarJSON([
                 'rows' => 0,
-                'msg' => 'Registro no encontrado',
+                'msg' => 'recintos no encontrado',
                 'status' => 'error',
-            ]); // no guarda archivo
+            ],'conseguir-', false); // no guarda archivo
         }
         break;
 
     case 'conseguirTodo':
-        // Obtiene todos los registros de la tabla
+        // Obtiene todos los recintos de la tabla
         $data = $conn->conseguirTodos();
 
         // Si hay datos, los envía en JSON con éxito
@@ -322,19 +275,20 @@ switch ($accion) {
             mandarJSON([
                 'rows' => count($data),
                 'data' => $data,
-                'msg' => 'Registro encontrado',
+                'msg' => 'recintos encontrado',
                 'status' => 'success',
-            ]); // guarda archivo
+            ],'conseguir_Todo-', $bandera); // guarda archivo
         } else { // Si no hay datos, envía mensaje de error
             mandarJSON([
                 'rows' => 0,
-                'msg' => 'Registro no encontrado',
+                'msg' => 'recintos no encontrados',
                 'status' => 'error',
-            ]); // no guarda archivo
+            ],'conseguir_Todo-', false); // no guarda archivo
         }
         break;
-
     case 'listar':
+        include "../view/list.php";  // Incluye listado de recintos
+        break;
     default:
         // Acción por defecto: renderiza las vistas HTML sin parámetros adicionales
         renderizarHtml();
