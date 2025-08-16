@@ -125,8 +125,4 @@ Videos recomendados
 
 ---
 
-👉 Con este formato todo se ve uniforme:  
-- **Listas ordenadas** con `-`.  
-- **Rutas en bloques de código**.  
-- **Comandos de consola destacados**.  
-- **Encabezados claros para secciones**.  
+
