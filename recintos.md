@@ -68,8 +68,13 @@ CREATE TABLE `recintos` (
 }
 ```
 ⚠️ *Requisitos Tecnicos:*
+
        •   ✅️ Uso obligatorio de bootstrap offline desde /ext.
+       
        •   ✅️ Uso de vistas parciales y enrutador (index.php)
+       
        •   ✅️ Uso de clases ConexionDB, paginador y ImgRZ
+       
        •   ✅️ Validacion y sanitizacion antes de guardar
+       
        •   ✅️ Proyecto ejecutable completamente en entorno local. (xampp, laragon)
