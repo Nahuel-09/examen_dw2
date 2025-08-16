@@ -1,4 +1,4 @@
-# Pasos para pasar un examen que te duraría 2h en literalmente 30/20m
+8# Pasos para pasar un examen que te duraría 2h en literalmente 30/20m
 
 ## (!) Requerimientos previos
 
@@ -116,12 +116,8 @@ Tutorial.md --> Documento enseñando todo
 
 Videos recomendados
 
-- [Video 1](https://youtu.be/9AEjpod4dHI)
-
-- [Video 2](https://youtu.be/2zkjIl0i3m8)
-
-- [Video 3](https://youtu.be/31Mnswz6-sM)
-
+- [Video 1](https://youtu.be/2zkjIl0i3m8)
+- [Video 2](https://youtu.be/31Mnswz6-sM)
 
 ---
 
