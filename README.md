@@ -1,4 +1,4 @@
-## Pasos para pasar un examen que te duraría 2h en literalmente 30/20m
+# Pasos para pasar un examen que te duraría 2h en literalmente 30/20m
 
 ## (!) Requerimientos previos
 
