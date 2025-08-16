@@ -1,20 +1,37 @@
 > *Pasos para pasar un examen que te duraria 2h en literalmente 30/20m:*
+
 > **(!) Requerimientos previos:**
+
     •  [Tener descargado xampp o otro ejecutor de servidor local.](https://youtu.be/IQ22Nme9t0M?si=HGfTJIR39n0EjfWm)  
+    
         •  Dependiendo de su sistema operativo va a tener que configurar estos campos.
+        
             - Configuracion de windows: 
+            
                 •  Tener una configuracion previa del *php.ini* con las extensiones requeridas.
+                
                 •  [Entrar a php.ini, ya adentro, quitar los ';' a las siguientes extensiones.](https://www.youtube.com/watch?v=q2IQmwkHSUQ)
+                
                     ✅   Manejo de imagenes:  `extension=gd`. 
+                    
                     ✅   Manejo de tipos de archivo: `extension=fileinfo.`
+                    
                     ✅   Manejo de caracteres especiales (EMOJIS, ASCII): `extension=mbstring`.
+                    
                     ✅   Manejo de JSON: `extension=json`.
+                    
                     • Configuracion previa: 
+                    
                         •  Permitir apertura y escritura de archivos: `allow_url_fopen`. (en php.ini)
+                        
                         •  [Permisos de carpetas.](https://youtu.be/MyexE_BhtZY?si=FSouvQ9OL4NG8SAv)
+            
             - Configuracion de linux y mac:
+            
                 • Manejar permisos desde la terminal. (bash u otros). 
+                
                     - Solo nos sirve usar `chmod 0777 'tucarpeta'`.   
+    
     • [Saber ejecutar xampp de manera basica.](https://youtu.be/vwjbBLVzI4Q?si=lbUgV4nncLbQGfTP)
 
 *Con todo esto ya hecho, podemos empezar :D*
