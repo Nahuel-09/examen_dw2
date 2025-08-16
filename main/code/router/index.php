@@ -24,8 +24,8 @@ $paginaActual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 $paginaTope = 4;
 // Crear objeto de paginación con total registros, página actual y límite de registros por página (5)
 $paginacion = new Pagination($totalRegistros, $paginaActual, $paginaTope);
-// Obtener los registros de recintos correspondientes a la página actual, usando los métodos de paginación
-$recintos = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite());
+// Obtener los registros de mascotas correspondientes a la página actual, usando los métodos de paginación
+$mascotas = $conn->conseguirPagina($paginacion->inicio(), $paginacion->getLimite());
 // Bandera para los JSONS
 $bandera = isset($_GET['guardar']) && $_GET['guardar'] == '1' ? true : false;
 ?>

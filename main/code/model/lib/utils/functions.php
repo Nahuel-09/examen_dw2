@@ -28,9 +28,9 @@ function mandarJSON($data, $method, $flag = false) {
 }
 
 // Función auxiliar para renderizar las vistas HTML
-function renderizarHtml($recintos = []) {
+function renderizarHtml($mascotas = []) {
     include "../view/header.php";  // Incluye cabecera HTML
-    include "../view/form.php"; // Incluye formulario para agregar/editar recintos
+    include "../view/form.php"; // Incluye formulario para agregar/editar mascotas
     include "../view/footer.php";      // Incluye pie de página
 }
 ?>

@@ -5,7 +5,7 @@
         <a class="navbar-brand d-flex align-items-center fw-bold fs-5" href="#">
             <img src="../../img/olimpia.png" alt="Logo"
                  class="me-2 rounded-circle border border-white shadow-sm" style="max-width: 80px;">
-            <span class="text-white">Nahuel Lopez</span>
+            <span class="text-white">"Tu nombre"</span>
         </a>
 
         <!-- Botón responsive -->

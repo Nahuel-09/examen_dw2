@@ -11,40 +11,40 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Capacidad</th>
-                    <th>Imagen</th>
+                    <th>especie</th>
+                    <th>edad</th>
+                    <th>foto</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (empty($recintos)): ?>
+                <?php if (empty($mascotas)): ?>
                     <tr>
-                        <td colspan="6" class="text-muted py-4 fs-5">No hay recintos registrados</td>
+                        <td colspan="6" class="text-muted py-4 fs-5">No hay mascotas registrados</td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($recintos as $m): ?>
+                    <?php foreach ($mascotas as $m): ?>
                         <tr>
                             <th scope="row" class="fw-bold"><?= htmlspecialchars($m['id']) ?></th>
                             <td><?= htmlspecialchars($m['nombre']) ?></td>
                             <td>
                                 <span class="badge bg-info text-dark px-3 py-2">
-                                    <?= htmlspecialchars($m['tipo']) ?>
+                                    <?= htmlspecialchars($m['especie']) ?>
                                 </span>
                             </td>
                             <td>
                                 <span class="badge bg-secondary px-3 py-2">
-                                    <?= htmlspecialchars($m['capacidad']) ?>
+                                    <?= htmlspecialchars($m['edad']) ?>
                                 </span>
                             </td>
                             <td>
-                                <?php if (!empty($m['imagen'])): ?>
+                                <?php if (!empty($m['foto'])): ?>
                                     <img class="img-thumbnail rounded-circle shadow-sm border-0" 
-                                         src="../model/images/<?= htmlspecialchars($m['imagen']) ?>" 
+                                         src="../model/images/<?= htmlspecialchars($m['foto']) ?>" 
                                          style="height: 60px; width: 60px; object-fit: cover;" 
-                                         alt="imagen de recintos">
+                                         alt="foto de mascotas">
                                 <?php else: ?>
-                                    <span class="text-muted fst-italic">Sin imagen</span>
+                                    <span class="text-muted fst-italic">Sin foto</span>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -55,7 +55,7 @@
                                     </a>
                                     <a href="?accion=eliminar&id=<?= $m['id'] ?>" 
                                        class="btn btn-outline-danger" 
-                                       onclick="return confirm('¿Seguro que quieres eliminar este recintos?');" 
+                                       onclick="return confirm('¿Seguro que quieres eliminar este mascotas?');" 
                                        title="Eliminar">
                                         <i class="bi bi-trash3-fill"></i>
                                     </a>

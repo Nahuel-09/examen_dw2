@@ -22,11 +22,11 @@ class ConnDB {
 *      - __destruct(): cierra la conexión al destruir el objeto.
 *   Uso de bind_param():
 *       - Este método enlaza variables a los parámetros de la consulta SQL preparada.
-*       - Recibe una cadena de tipos indicando el tipo de cada parámetro:
+*       - Recibe una cadena de especies indicando el especie de cada parámetro:
 *       's' para string, 'i' para integer, 'd' para double, 'b' para blob.
 *       - Ejemplo: "ssis" significa string, string, integer, string.
 */
-    private $conn; // Propicapacidad privada para almacenar la conexión a la base de datos
+    private $conn; // Propiedad privada para almacenar la conexión a la base de datos
 
     public function __construct() {
         // Se inicializa la conexión con la base de datos usando mysqli
@@ -43,14 +43,14 @@ class ConnDB {
     // Método para agregar un nuevo registro. Recibe un arreglo con los datos.
     public function agregar(array $datos): bool {
         // Consulta SQL preparada para insertar los datos en la tabla definida en NAME_TABLE
-        $sql = "INSERT INTO " . NAME_TABLE . " (nombre, tipo, capacidad, imagen) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO " . NAME_TABLE . " (nombre, especie, edad, foto) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
 
         // Si la preparación falla, retorna false
         if (!$stmt) return false;
 
         // Se enlazan los parámetros: dos strings, un entero y un string
-        $stmt->bind_param("ssis", $datos['nombre'], $datos['tipo'], $datos['capacidad'], $datos['imagen']);
+        $stmt->bind_param("ssis", $datos['nombre'], $datos['especie'], $datos['edad'], $datos['foto']);
         // Se ejecuta la consulta
         $result = $stmt->execute();
         // Se cierra el statement para liberar recursos
@@ -62,14 +62,14 @@ class ConnDB {
     // Método para editar un registro existente, recibe los datos y el id del registro a modificar
     public function editar(array $datos, int $id): bool {
         // Consulta SQL preparada para actualizar el registro con id dado
-        $sql = "UPDATE " . NAME_TABLE . " SET nombre = ?, tipo = ?, capacidad = ?, imagen = ? WHERE id = ?";
+        $sql = "UPDATE " . NAME_TABLE . " SET nombre = ?, especie = ?, edad = ?, foto = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
 
         // Si la preparación falla, retorna false
         if (!$stmt) return false;
 
         // Se enlazan los parámetros: dos strings, un entero, un string y un entero (id)
-        $stmt->bind_param("ssisi", $datos['nombre'], $datos['tipo'], $datos['capacidad'], $datos['imagen'], $id);
+        $stmt->bind_param("ssisi", $datos['nombre'], $datos['especie'], $datos['edad'], $datos['foto'], $id);
         // Se ejecuta la consulta
         $result = $stmt->execute();
         // Se cierra el statement
@@ -107,7 +107,6 @@ class ConnDB {
         $stmt = $this->conn->prepare("SELECT * FROM " . NAME_TABLE . " WHERE id = ?");
         // Si falla la preparación, retorna null
         if (!$stmt) return null;
-
         // Se enlaza el parámetro id
         $stmt->bind_param("i", $id);
         // Se ejecuta la consulta

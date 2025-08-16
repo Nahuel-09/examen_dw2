@@ -1,46 +1,54 @@
-<div class="text-center my-3">
-    <a href="../router/index.php" class="btn btn-outline-secondary btn-lg">
-        <i class="bi bi-arrow-left"></i> Volver al formulario
+<div class="text-center my-4">
+    <a href="../router/index.php" class="btn btn-outline-dark btn-lg shadow-sm">
+        <i class="bi bi-arrow-left-circle-fill me-2"></i> Volver al formulario
     </a>
 </div>
 
 <section class="container">
-    <div class="table-responsive shadow-sm rounded">
-        <table class="table table-hover table-bordered align-middle text-center">
-            <thead class="table-primary">
+    <div class="table-responsive shadow rounded">
+        <table class="table table-striped table-hover table-bordered align-middle text-center">
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Capacidad</th>
-                    <th>Imagen</th>
+                    <th>especie</th>
+                    <th>edad</th>
+                    <th>foto</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (empty($recintos)): ?>
+                <?php if (empty($mascotas)): ?>
                     <tr>
-                        <td colspan="6" class="text-muted">No hay recintos registrados</td>
+                        <td colspan="6" class="text-muted">No hay mascotas registrados</td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($recintos as $m): ?>
+                    <?php foreach ($mascotas as $m): ?>
                         <tr>
                             <th scope="row"><?= htmlspecialchars($m['id']) ?></th>
                             <td><?= htmlspecialchars($m['nombre']) ?></td>
-                            <td><span class="badge bg-info"><?= htmlspecialchars($m['tipo']) ?></span></td>
-                            <td><span class="badge bg-secondary"><?= htmlspecialchars($m['capacidad']) ?></span></td>
+                            <td><span class="badge bg-info text-dark"><?= htmlspecialchars($m['especie']) ?></span></td>
+                            <td><span class="badge bg-secondary"><?= htmlspecialchars($m['edad']) ?></span></td>
                             <td>
-                                <?php if (!empty($m['imagen'])): ?>
-                                    <img class="img-thumbnail" src="../model/images/<?= htmlspecialchars($m['imagen']) ?>" style="height: 60px; width: 60px;" alt="imagen de recintos">
+                                <?php if (!empty($m['foto'])): ?>
+                                    <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="height: 60px; width: 60px;" alt="foto de mascotas">
                                 <?php else: ?>
-                                    <span class="text-muted">Sin imagen</span>
+                                    <span class="text-muted">Sin foto</span>
                                 <?php endif; ?>
                             </td>
-                            <td>
-                                <a href="?accion=editar&id=<?= $m['id'] ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i> Editar</a>
-                                <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este recintos?');"><i class="bi bi-trash"></i> Eliminar</a>
-                                <a onclick="descargarFila(<?= $m['id'] ?>)" class="btn btn-sm btn-warning"><i class="bi bi-download"></i> JSON</a>
-                                <a href="?accion=conseguir&id=<?= $m['id'] ?>" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i> Ver</a>
+                            <td class="d-flex justify-content-center flex-wrap gap-2">
+                                <a href="?accion=editar&id=<?= $m['id'] ?>" class="btn btn-sm btn-primary">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este mascotas?');">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </a>
+                                <button onclick="descargarFila(<?= $m['id'] ?>)" class="btn btn-sm btn-warning">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                                <a href="?accion=conseguir&id=<?= $m['id'] ?>" class="btn btn-sm btn-secondary">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -53,7 +61,7 @@
 <?php if ($paginacion->totalPaginas() > 0): ?>
 <section class="d-flex justify-content-center my-4">
     <nav aria-label="Page navigation">
-        <ul class="pagination pagination-lg">
+        <ul class="pagination pagination-lg shadow-sm">
             <li class="page-item <?= ($paginaActual <= 1) ? 'disabled' : '' ?>">
                 <a class="page-link" href="?accion=listar&pagina=<?= ($paginaActual - 1) ?>">&laquo;</a>
             </li>
@@ -71,7 +79,7 @@
 <?php endif; ?>
 
 <?php if ($totalRegistros > 0): ?>
-    <p class="text-center text-muted">
-        Página <?= $paginaActual ?> — Mostrando <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?> de <?= $totalRegistros ?> registros.
-    </p>
+<p class="text-center text-muted mb-5">
+    Página <?= $paginaActual ?> — Mostrando <?= min($paginacion->inicio() + $paginacion->registrosPorPagina, $totalRegistros) ?> de <?= $totalRegistros ?> registros.
+</p>
 <?php endif; ?>

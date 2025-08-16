@@ -1,6 +1,6 @@
 <footer class="bg-gradient bg-light text-black py-5 mt-auto shadow-lg">
     <div class="container text-center">
-        <!-- Título destacado con tipografía más elegante -->
+        <!-- Título destacado con especiegrafía más elegante -->
         <h5 class="mb-2 fw-bold">Hecho por "Tu nombre". Todos los derechos reservados</h5>
         
         <!-- Línea decorativa -->

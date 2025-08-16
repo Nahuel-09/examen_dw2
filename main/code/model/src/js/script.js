@@ -60,7 +60,7 @@ function descargarTodo() {
             // Crear enlace temporal y hacer click
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'recintos.json';
+            a.download = 'backup_table.json';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

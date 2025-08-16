@@ -5,44 +5,44 @@
 <br>
 <!-- Contenedor principal -->
 <section class="container">
-    <!-- Tabla Bootstrap con estilos para mostrar recintos -->
+    <!-- Tabla Bootstrap con estilos para mostrar mascotas -->
     <table class="table table-info table-striped-columns text-center justify-content-center align-items-center">
         <thead>
             <tr>
                 <!-- Encabezados de columnas -->
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Capacidad</th>
-                <th scope="col">imagen</th>
+                <th scope="col">Especie</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Verifica si no hay recintos para mostrar -->
-            <?php if (empty($recintos)): ?>
+            <!-- Verifica si no hay mascotas para mostrar -->
+            <?php if (empty($mascotas)): ?>
                 <tr>
-                    <td colspan="6" class="text-center">No hay recintos registradas</td>
+                    <td colspan="6" class="text-center">No hay mascotas registradas</td>
                 </tr>
             <?php else: ?>
-                <!-- Recorre cada recintos para mostrar en filas -->
-                <?php foreach ($recintos as $m): ?>
+                <!-- Recorre cada mascotas para mostrar en filas -->
+                <?php foreach ($mascotas as $m): ?>
                     <tr class="container justify-content-center">
                         <!-- Mostrar cada campo con htmlspecialchars para evitar XSS -->
                         <th class="align-middle text-center" scope="row"><?= htmlspecialchars($m['id'] ?? '') ?></th>
                         <td class="align-middle text-center"><?= htmlspecialchars($m['nombre'] ?? '') ?></td>
-                        <td class="align-middle text-center"><?= htmlspecialchars($m['tipo'] ?? '') ?></td>
-                        <td class="align-middle text-center"><?= htmlspecialchars($m['capacidad'] ?? '') ?></td>
+                        <td class="align-middle text-center"><?= htmlspecialchars($m['especie'] ?? '') ?></td>
+                        <td class="align-middle text-center"><?= htmlspecialchars($m['edad'] ?? '') ?></td>
                         <td class="align-middle text-center">
-                            <!-- Mostrar imagen miniatura si existe -->
-                            <?php if (!empty($m['imagen'])): ?>
-                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['imagen']) ?>" style="height: 40px; width: 40px; min-height: 80px; min-width: 80px;" alt="imagen de recintos">
+                            <!-- Mostrar foto miniatura si existe -->
+                            <?php if (!empty($m['foto'])): ?>
+                                <img class="img-thumbnail rounded" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="max-height: 80px;" alt="foto de mascotas">
                             <?php endif; ?>
                         </td>
                         <td class="align-middle text-center">
-                            <!-- Botones para editar, eliminar y descargar JSON de la recintos -->
+                            <!-- Botones para editar, eliminar y descargar JSON de la mascotas -->
                             <a href="?accion=editar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-primary">Editar</a>
-                            <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-danger" onclick="return confirm('¿Seguro que quieres eliminar esta recintos?');">Eliminar</a>
+                            <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-danger" onclick="return confirm('¿Seguro que quieres eliminar esta mascotas?');">Eliminar</a>
                             <a onclick="descargarFila(<?= $m['id'] ?>)" class="btn btn-sm me-2 btn-warning">Descargar JSON</a>
                             <a href="?accion=conseguir&id=<?= $m['id'] ?>" class="btn btn-sm me-2 btn-secondary">Ver JSON</a>
                         </td>

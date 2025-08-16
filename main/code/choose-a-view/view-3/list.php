@@ -11,36 +11,36 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Capacidad</th>
-                    <th>Imagen</th>
+                    <th>especie</th>
+                    <th>edad</th>
+                    <th>foto</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <?php if (empty($recintos)): ?>
+                <?php if (empty($mascotas)): ?>
                     <tr>
-                        <td colspan="6" class="text-muted py-3">No hay recintos registrados</td>
+                        <td colspan="6" class="text-muted py-3">No hay mascotas registrados</td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($recintos as $m): ?>
+                    <?php foreach ($mascotas as $m): ?>
                         <tr class="align-middle">
                             <th scope="row"><?= htmlspecialchars($m['id']) ?></th>
                             <td class="fw-semibold"><?= htmlspecialchars($m['nombre']) ?></td>
-                            <td><span class="badge bg-info text-dark px-3 py-2"><?= htmlspecialchars($m['tipo']) ?></span></td>
-                            <td><span class="badge bg-secondary px-3 py-2"><?= htmlspecialchars($m['capacidad']) ?></span></td>
+                            <td><span class="badge bg-info text-dark px-3 py-2"><?= htmlspecialchars($m['especie']) ?></span></td>
+                            <td><span class="badge bg-secondary px-3 py-2"><?= htmlspecialchars($m['edad']) ?></span></td>
                             <td>
-                                <?php if (!empty($m['imagen'])): ?>
-                                    <img class="img-thumbnail rounded shadow-sm" src="../model/images/<?= htmlspecialchars($m['imagen']) ?>" style="height: 60px; width: 60px;" alt="imagen de recintos">
+                                <?php if (!empty($m['foto'])): ?>
+                                    <img class="img-thumbnail rounded shadow-sm" src="../model/images/<?= htmlspecialchars($m['foto']) ?>" style="height: 60px; width: 60px;" alt="foto de mascotas">
                                 <?php else: ?>
-                                    <span class="text-muted">Sin imagen</span>
+                                    <span class="text-muted">Sin foto</span>
                                 <?php endif; ?>
                             </td>
                             <td class="d-flex justify-content-center flex-wrap gap-2">
                                 <a href="?accion=editar&id=<?= $m['id'] ?>" class="btn btn-sm btn-primary shadow-sm" title="Editar">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm btn-danger shadow-sm" onclick="return confirm('¿Seguro que quieres eliminar este recintos?');" title="Eliminar">
+                                <a href="?accion=eliminar&id=<?= $m['id'] ?>" class="btn btn-sm btn-danger shadow-sm" onclick="return confirm('¿Seguro que quieres eliminar este mascotas?');" title="Eliminar">
                                     <i class="bi bi-trash3-fill"></i>
                                 </a>
                                 <button onclick="descargarFila(<?= $m['id'] ?>)" class="btn btn-sm btn-warning shadow-sm" title="Descargar JSON">
