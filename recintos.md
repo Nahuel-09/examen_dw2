@@ -56,6 +56,7 @@ CREATE TABLE `recintos` (
       ○ Ser una imagen .jpg o .jpeg
       ○ Ser redimensionado a 540px de ancho usando la clase ImgRZ.
       ○ Almacenarse en la carpeta /images
+  
 🔁 Respuestas JSON:
 *Formato de salida para JSON general y por registro:*
 ```json
