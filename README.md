@@ -45,30 +45,55 @@ Antes que nada, doy una guia visual de que es lo mas importantes que cambies, ba
 
 Voy a tratar de resumir mi directorio lo mas simple posible:
 
-/main/ --> Carpeta principal
+
+/main/ --> Carpeta principal    
+    
     /code/ --> Apartado de codigo
+        
         /choose-a-view/  --> Elegi un diseño que te guste
+            
             /view-1/   --> Primer Diseño 
+            
                 footer.php  --> Pie (🔵)
+                
                 form.php  --> Formulario de alta y edicion (🔵)
+                
                 header.php  --> Cabecera que maneja botones globales (🔵)
+                
                 list.php    --> Lista que muestra los datos en la pagina (🔵)
+            
             /view-2/   --> Segundo Diseño
+                
                 footer.php  --> Pie (🔵)
+                
                 form.php  --> Formulario de alta y edicion (🔵)
+                
                 header.php  --> Cabecera que maneja botones globales (🔵)
+                
                 list.php    --> Lista que muestra los datos en la pagina (🔵)
+                
             /view-3/   --> Tercer Diseño
+                
                 footer.php  --> Pie (🔵)
+                
                 form.php  --> Formulario de alta y edicion (🔵)
+                
                 header.php  --> Cabecera que maneja botones globales (🔵)
+            
                 list.php    --> Lista que muestra los datos en la pagina (🔵)
+
             /view-4/   --> Cuarto Diseño
+                
                 footer.php  --> Pie (🔵)
+                
                 form.php  --> Formulario de alta y edicion (🔵)
+                
                 header.php  --> Cabecera que maneja botones globales (🔵)
+        
                 list.php    --> Lista que muestra los datos en la pagina (🔵)
+        
         /controller/   --> Logica de negocio, recibiendo informacion (de model) e interfaz (de la view que elijas)
+        
             mainController.php  --> Maneja las acciones por medio de gets (agregar, editar, eliminar, listar, eliminarTodo, conseguirJSON, conseguirTodosLosJSON, con validacion y sanitizacion incluida) (🟡)
         
         /model/  --> Carpeta encargada del envio de informacion externa.
@@ -91,7 +116,7 @@ Voy a tratar de resumir mi directorio lo mas simple posible:
                 /js/    --> Animacion y funcionalidad propia
 
         /router/    --> Enrutador que sirve para conectar todo
-            [index.php](https://github.com/Nahuel-09/examen_dw2/blob/main/main/code/router/index.php)  --> Conecta los modelos, las vistas, y el controlador de manera segura (🟡)
+            index.php --> Conecta los modelos, las vistas, y el controlador de manera segura (🟡)
         /view/   --> Vista por defecto, recomendable no usar
         footer.php  --> Pie (🔴)
         form.php  --> Formulario de alta y edicion (🔴)
@@ -99,9 +124,9 @@ Voy a tratar de resumir mi directorio lo mas simple posible:
         list.php    --> Lista que muestra los datos en la pagina (🔴)
 
     /DB/  --> Plantilla de base de datos
-        [database.sql](https://github.com/Nahuel-09/examen_dw2/blob/main/main/DB/database.sql) (🔵)
+        database.sql(🔵)
     /img/ --> Apartado de imagenes decorativas :D
-        [olimpia.png](https://github.com/Nahuel-09/examen_dw2/blob/main/main/img/olimpia.png) (🔵)
+        olimpia.png (🔵)
         
 .gitignore  --> Archivo para ignorar carpetas y archivos pesados de github (node_modules)
 
