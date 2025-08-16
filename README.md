@@ -20,7 +20,7 @@
     ### Configuración de Linux y Mac
     - Manejar permisos desde la terminal (bash u otros):
       ```bash
-      chmod 0777 '/images/' | /API/
+      chmod 0777 'tucarpeta'
       ```
 
 - [Saber ejecutar XAMPP de manera básica.](https://youtu.be/vwjbBLVzI4Q?si=lbUgV4nncLbQGfTP)
@@ -120,5 +120,3 @@ Videos recomendados
 - [Video 2](https://youtu.be/31Mnswz6-sM)
 
 ---
-
-
