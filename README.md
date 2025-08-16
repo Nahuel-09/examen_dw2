@@ -108,6 +108,9 @@ README  -->  Documento del segundo examen
 Tutorial.md  -->   Documento enseñando todo
 
 Muy bien, explicado con este esquema recomiendo ver 2 videos:
+
 Video 1   ---->   https://youtu.be/9AEjpod4dHI
+
 Video 2   ---->   https://youtu.be/2zkjIl0i3m8
+
 Video 3   ---->   https://youtu.be/31Mnswz6-sM
