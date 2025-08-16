@@ -1,6 +1,7 @@
 > *Pasos para pasar un examen que te duraria 2h en literalmente 30/20m:*
 
 > *(!) Requerimientos previos:*
+
     •  [Tener descargado xampp o otro ejecutor de servidor local.](https://youtu.be/IQ22Nme9t0M?si=HGfTJIR39n0EjfWm)  
         •  Dependiendo de su sistema operativo va a tener que configurar estos campos.
             - Configuracion de windows: 
