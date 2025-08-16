@@ -102,9 +102,13 @@ Voy a tratar de resumir mi directorio lo mas simple posible:
         [database.sql](https://github.com/Nahuel-09/examen_dw2/blob/main/main/DB/database.sql) (🔵)
     /img/ --> Apartado de imagenes decorativas :D
         [olimpia.png](https://github.com/Nahuel-09/examen_dw2/blob/main/main/img/olimpia.png) (🔵)
+        
 .gitignore  --> Archivo para ignorar carpetas y archivos pesados de github (node_modules)
+
 README.md  -->  Documento del primer examen
+
 README  -->  Documento del segundo examen 
+
 Tutorial.md  -->   Documento enseñando todo
 
 Muy bien, explicado con este esquema recomiendo ver 2 videos:
