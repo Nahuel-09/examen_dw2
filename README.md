@@ -20,11 +20,7 @@
     ### Configuración de Linux y Mac
     - Manejar permisos desde la terminal (bash u otros):
       ```bash
-<<<<<<< HEAD
       chmod 0777 '/images/' | '/API/'
-=======
-      chmod 0777 '/images/' | /API/
->>>>>>> e473d5a28a138150d6c1f7342ebcb622fc401c0d
       ```
 
 - [Saber ejecutar XAMPP de manera básica.](https://youtu.be/vwjbBLVzI4Q?si=lbUgV4nncLbQGfTP)
@@ -82,11 +78,8 @@
             /images/
                 imagen-de-referencia.png (🔵)
             /lib/
-<<<<<<< HEAD
                 /utils/ --> Guardar funciones y no clases
-=======
                 /utils/
->>>>>>> e473d5a28a138150d6c1f7342ebcb622fc401c0d
                     config.php     --> Configuración general y depuración (🔴)
                     functions.php  --> Manejo de JSON y renderizado HTML (🟢)
                 ConnDB.php        --> Base de datos (🟠)
@@ -101,8 +94,6 @@
 
         /router/
             index.php --> Conecta modelos, vistas y controlador de manera segura (🟡)
-<<<<<<< HEAD
-
         /view/ --> Vista por defecto, recomendable no usar
 
         footer.php --> Pie (🔴)
@@ -130,34 +121,3 @@ Videos recomendados
 - [Ver playlist](https://www.youtube.com/playlist?list=PLTpshO1wHOju4oBFZaI0khboksf5eea2Y)
   
 ---
-=======
-
-        /view/ --> Vista por defecto, recomendable no usar
-
-        footer.php --> Pie (🔴)
-        form.php   --> Formulario de alta y edición (🔴)
-        header.php --> Cabecera con botones globales (🔴)
-        list.php   --> Lista que muestra los datos (🔴)
-
-    /DB/
-        database.sql (🔵)
-
-    /img/
-        olimpia.png (🔵)
-
-.gitignore  --> Ignora carpetas y archivos pesados (node_modules)
-README.md   --> Documento del primer examen
-README      --> Documento del segundo examen
-Tutorial.md --> Documento enseñando todo
-```
----
-
-Videos recomendados
-
-- [Video 1](https://youtu.be/2zkjIl0i3m8)
-- [Video 2](https://youtu.be/31Mnswz6-sM)
-
----
-
-
->>>>>>> e473d5a28a138150d6c1f7342ebcb622fc401c0d
