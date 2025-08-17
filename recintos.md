@@ -56,12 +56,22 @@ CREATE TABLE `recintos` (
   - Debe mostrar los campos:
     - nombre (string), tipo(string), capacidad(int), imagen(string).
 - Validacion y sanitizacion obligatorias.
+<<<<<<< HEAD
     - El archivo cargado debe:
     - Ser una imagen .jpg o .jpeg
     - Ser redimensionado a 540px de ancho usando la clase ImgRZ.
     - Almacenarse en la carpeta /images
 ### 🔁 Respuestas JSON:
 **Formato de salida para JSON general y por registro:**
+=======
+- El archivo cargado debe:
+      ○ Ser una imagen .jpg o .jpeg
+      ○ Ser redimensionado a 540px de ancho usando la clase ImgRZ.
+      ○ Almacenarse en la carpeta /images
+  
+🔁 Respuestas JSON:
+*Formato de salida para JSON general y por registro:*
+>>>>>>> e473d5a28a138150d6c1f7342ebcb622fc401c0d
 ```json
 {
    "rows": 1,
@@ -70,6 +80,7 @@ CREATE TABLE `recintos` (
    "status": "success"
 }
 ```
+<<<<<<< HEAD
 > ⚠️ **Requisitos Tecnicos:**
 > 
   - ✅️ Uso obligatorio de bootstrap offline desde /ext.
@@ -77,3 +88,16 @@ CREATE TABLE `recintos` (
   - ✅️ Uso de clases ConexionDB, paginador y ImgRZ
   - ✅️ Validacion y sanitizacion antes de guardar
   - ✅️ Proyecto ejecutable completamente en entorno local. (xampp, laragon)
+=======
+⚠️ *Requisitos Tecnicos:*
+
+       •   ✅️ Uso obligatorio de bootstrap offline desde /ext.
+       
+       •   ✅️ Uso de vistas parciales y enrutador (index.php)
+       
+       •   ✅️ Uso de clases ConexionDB, paginador y ImgRZ
+       
+       •   ✅️ Validacion y sanitizacion antes de guardar
+       
+       •   ✅️ Proyecto ejecutable completamente en entorno local. (xampp, laragon)
+>>>>>>> e473d5a28a138150d6c1f7342ebcb622fc401c0d
