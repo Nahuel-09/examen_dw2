@@ -20,7 +20,7 @@
     ### Configuración de Linux y Mac
     - Manejar permisos desde la terminal (bash u otros):
       ```bash
-      chmod 0777 'tucarpeta'
+      chmod 0777 '/images/' | '/API/'
       ```
 
 - [Saber ejecutar XAMPP de manera básica.](https://youtu.be/vwjbBLVzI4Q?si=lbUgV4nncLbQGfTP)
@@ -78,7 +78,7 @@
             /images/
                 imagen-de-referencia.png (🔵)
             /lib/
-                /utils/
+                /utils/ --> Guardar funciones y no clases
                     config.php     --> Configuración general y depuración (🔴)
                     functions.php  --> Manejo de JSON y renderizado HTML (🟢)
                 ConnDB.php        --> Base de datos (🟠)
@@ -116,7 +116,8 @@ Tutorial.md --> Documento enseñando todo
 
 Videos recomendados
 
-- [Video 1](https://youtu.be/2zkjIl0i3m8)
-- [Video 2](https://youtu.be/31Mnswz6-sM)
-
+- [Como diseñar una base de datos en phpMyAdmin](https://youtu.be/2zkjIl0i3m8)
+- [Como pasar un examen en 20m](https://youtu.be/31Mnswz6-sM)
+- [Ver playlist](https://www.youtube.com/playlist?list=PLTpshO1wHOju4oBFZaI0khboksf5eea2Y)
+  
 ---
