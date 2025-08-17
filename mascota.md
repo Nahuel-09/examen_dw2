@@ -45,8 +45,8 @@
 
 > #### 📦 *Base de Datos:*
 
-• Nombre obligatorio: dw2f1 <inicial_nombre><apellido
-• Crear la siguiente tabla:
+- Nombre obligatorio: dw2f1 <inicial_nombre><apellido>
+- Crear la siguiente tabla:
 ```sql
 CREATE TABLE `mascotas` (
 id INT AUTO INCREMENT PRIMARY KEY,
